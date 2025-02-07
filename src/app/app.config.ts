@@ -3,7 +3,7 @@ import { provideRouter } from '@angular/router';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
 import { routes } from './app.routes';
-import Aura from '@primeng/themes/aura';
+import Lara from '@primeng/themes/lara';
 import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
@@ -14,11 +14,13 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {
-        preset: Aura,
+        preset: Lara,
         options: {
+          cssLayer: {
+            name: 'primeng',
+            order: 'app-styles, primeng, another-css-library'
+          },
           prefix: 'p',
-          darkModeSelector: 'system',
-          cssLayer: false,
           ripple: true,
           inputVariant: 'filled'
         }
