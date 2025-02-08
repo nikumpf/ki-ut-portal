@@ -1,7 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+@import "primeflex/themes/primeone-light.css";
 @import "primeflex/primeflex.css";
 @import "primeicons/primeicons.css";
 
+:root {
+    font-family: system-ui, "Inter var", sans-serif;
+}
+
+body {
+    margin: 0px;
+}
 
 /* Provide sufficient contrast against white background */
 a {
