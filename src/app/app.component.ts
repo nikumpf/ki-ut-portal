@@ -39,15 +39,13 @@ export class AppComponent implements OnInit, OnDestroy {
     this.primeng.ripple.set(true);
 
     this.channelsService.getChannels().pipe(takeUntil(this._unsubscribeAll)).subscribe(channels => {
-      console.log('channels', channels);
       this._channels = channels;
     });
 
-    this.router.events.subscribe(() => {
+    this.router.events.pipe(takeUntil(this._unsubscribeAll)).subscribe(() => {
       const url = this.router.url;
       const match = url.match(/\/channels\/([0-9a-fA-F-]{36})/);
       if(!!match && !this.isMenuOpen) {
-        console.log('ngOnInit()::toggleMenu');
         this.isMenuOpen = true;
       }
 
@@ -65,6 +63,5 @@ export class AppComponent implements OnInit, OnDestroy {
     event.preventDefault();  // Verhindert, dass der Klick die Seite beeinflusst
 
     this.isMenuOpen = !this.isMenuOpen;
-    console.log('isMenuOpen', this.isMenuOpen);
   }
 }

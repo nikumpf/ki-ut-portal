@@ -19,7 +19,8 @@ export class ChannelListComponent implements OnInit {
   constructor(
     private router: Router,
     private channelService: ChannelsService
-  ){}
+  ) {
+  }
 
   ngOnInit() {
     this.items = [
