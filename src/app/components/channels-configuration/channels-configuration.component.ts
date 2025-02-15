@@ -73,20 +73,14 @@ export class ChannelsConfigurationComponent implements OnInit, OnDestroy {
   saveChanges<T extends keyof IChannel>(field: T): void {
     if (this.currentChannel) {
       this.currentChannel[field] = this.tempChannel[field] as IChannel[T];
+      console.log('Save changes:', field, this.currentChannel[field]);
       this.updateChannel(this.currentChannel);
     }
     this.editingField = null;
   }
 
   updateChannel(channel: IChannel) {
-    this.channelsService.updateChannel(channel).subscribe(
-      updatedChannel => {
-        console.log('Channel updated:', updatedChannel);
-        // Optional: Die Kanäle neu laden
-        this.channelsService.getChannels();
-      },
-      error => console.error('Update failed', error)
-    );
+    this.channelsService.updateChannel(channel);
   }
 
   onFileSelected(event: Event) {

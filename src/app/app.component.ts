@@ -4,14 +4,9 @@ import { ChannelsService } from './services/channels.service';
 import { IChannel } from './models/channel';
 import { PrimeNG } from 'primeng/config';
 
-//import type { Schema } from '../amplify/data/resource';
-import type { Schema } from '../../amplify/data/resource';
-import { generateClient } from 'aws-amplify/data';
 import { ActivatedRoute, Router, RouterModule, RouterOutlet } from '@angular/router';
 import { StyleClassModule } from 'primeng/styleclass';
 import { CommonModule } from '@angular/common';
-
-const client = generateClient<Schema>();
 
 @Component({
   selector: 'app-root',
