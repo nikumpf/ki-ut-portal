@@ -4,13 +4,14 @@ import { Subject, takeUntil } from 'rxjs';
 import { ChannelsService } from '../../services/channels.service';
 import { IChannel } from '../../models/channel';
 import { CommonModule } from '@angular/common';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-channels-configuration',
   templateUrl: './channels-configuration.component.html',
   styleUrl: './channels-configuration.component.scss',
   standalone: true,
-  imports: [CommonModule]
+  imports: [CommonModule, ButtonModule]
 })
 export class ChannelsConfigurationComponent implements OnInit, OnDestroy {
   _channels: IChannel[] = [];
