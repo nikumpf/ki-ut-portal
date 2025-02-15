@@ -5,6 +5,7 @@
             <span class="text-xl font-medium text-red-500 text-center">Sender nicht gefunden</span>
         </div>
         <div *ngIf="currentChannel" class="flex align-items-center">
+            <img *ngIf="currentChannel.image" [src]="currentChannel.image" class="border-round mr-3" height="20" />
             <span class="text-xl font-medium text-900">{{currentChannel.name}}</span>
         </div>
     </div>
@@ -66,7 +67,23 @@
                   <button *ngIf="editingField !== 'mode'" pButton pRipple label="" icon="pi pi-pencil" class="p-button-text" (click)="toggleEdit('mode')" [disabled]="editingField !== null"></button>
                 </div>
               </li>
-              
+              <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+                <div class="text-500 w-2 md:w-2 font-medium">Bild</div>
+                <div class="text-900 w-8 md:w-8 md:flex-order-0 flex-order-0">
+                  <ng-container *ngIf="editingField === 'image'">
+                    <input type="file" (change)="onFileSelected($event)" accept="image/*" class="p-inputtext w-full" />
+                  </ng-container>
+                  <ng-container *ngIf="editingField !== 'image'">
+                    <img *ngIf="currentChannel.image" [src]="currentChannel.image" class="border-round" height="20"/>
+                    <span *ngIf="!currentChannel.image">Kein Bild vorhanden</span>
+                  </ng-container>
+                </div>
+                <div class="w-2 md:w-2 flex justify-content-end">
+                  <button *ngIf="editingField === 'image'" pButton pRipple icon="pi pi-check" class="p-button-text" (click)="toggleEdit('image')"></button>
+                  <button *ngIf="editingField === 'image'" pButton pRipple icon="pi pi-times" class="p-button-text" (click)="cancelEdit()"></button>
+                  <button *ngIf="editingField !== 'image'" pButton pRipple icon="pi pi-pencil" class="p-button-text" (click)="toggleEdit('image')" [disabled]="editingField !== null"></button>
+                </div>
+              </li>
           </ul>
     </div>
 </div>

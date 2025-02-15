@@ -88,4 +88,15 @@ export class ChannelsConfigurationComponent implements OnInit, OnDestroy {
       error => console.error('Update failed', error)
     );
   }
+
+  onFileSelected(event: Event) {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.tempChannel.image = reader.result as string; // Speichert das Bild als Base64
+      };
+      reader.readAsDataURL(file);
+    }
+  }
 }

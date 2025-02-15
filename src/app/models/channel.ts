@@ -10,5 +10,6 @@ export enum ChannelMode {
     name: string;
     stream: string;
     mode: ChannelMode;
+    image?: string;
   }
   
