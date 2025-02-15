@@ -8,5 +8,5 @@ export const routes: Routes = [
     { path: '', component: HomeComponent, pathMatch: 'full' },
     { path: 'dashboard', component: DashboardComponent },
     { path: 'channels', component: ChannelListComponent },
-    { path: 'channel/:id', component: ChannelsConfigurationComponent },
+    { path: 'channels/:id', component: ChannelsConfigurationComponent },
 ];

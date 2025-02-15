@@ -23,30 +23,38 @@
             <li>
               <a pRipple class="flex align-items-center cursor-pointer p-3 hover:bg-bluegray-900 border-round text-bluegray-100 hover:text-bluegray-50
                             transition-duration-150 transition-colors"
-                 routerLink="dashboard">
+                 routerLink="dashboard"
+                 >
                 <i class="pi pi-home mr-2"></i>
                 <span class="font-medium">Dashboard</span>
               </a>
             </li>
             <li>
-              <a pRipple class="flex align-items-center cursor-pointer p-3 hover:bg-bluegray-900 border-round text-bluegray-100 hover:text-bluegray-50
-                            transition-duration-150 transition-colors"
-                 pStyleClass="@next" enterClass="hidden" enterActiveClass="slidedown" leaveToClass="hidden" leaveActiveClass="slideup"
-                 routerLink="channels">
-                <i class="pi pi-video mr-2"></i>
-                <span class="font-medium">Sender</span>
-                <i class="pi pi-chevron-down ml-auto"></i>
+              <a pRipple 
+                 class="flex align-items-center cursor-pointer p-3 hover:bg-bluegray-900 border-round text-bluegray-100 hover:text-bluegray-50
+                        transition-duration-150 transition-colors"
+                        routerLink="channels"
+                  style="text-decoration-line: none;"
+                 >
+                <i class="pi pi-video mr-2" style="text-decoration-line: underline;"></i>
+                <span class="font-medium" style="text-decoration-line: underline;">Sender</span>
+                <i class="pi ml-auto" 
+                   [ngClass]="{'pi-chevron-up': isMenuOpen, 'pi-chevron-down': !isMenuOpen}" 
+                   (click)="toggleMenu($event)"
+                   style="pointer-events: auto; text-decoration: none;"></i>
               </a>
-              <ul class="list-none py-0 pl-3 pr-0 m-0 hidden overflow-y-hidden transition-all transition-duration-400 transition-ease-in-out">
+              <ul class="list-none py-0 pl-3 pr-0 m-0 overflow-y-hidden transition-all transition-duration-400 transition-ease-in-out"
+                  [ngClass]="{'hidden': !isMenuOpen}">
                 <li *ngFor="let channel of _channels">
                   <a pRipple class="flex align-items-center cursor-pointer p-3 hover:bg-bluegray-900 border-round text-bluegray-100 hover:text-bluegray-50
-                                transition-duration-150 transition-colors"
-                     [routerLink]="['/channel',channel.id]">
-                    <span class="font-medium">{{channel.name}}</span>
+                                    transition-duration-150 transition-colors"
+                     [routerLink]="['/channels', channel.id]"
+                     [ngClass]="{'text-yellow-500 text-black': selectedChannelId === channel.id, 'text-bluegray-100 hover:text-bluegray-50 hover:bg-bluegray-900': selectedChannelId !== channel.id}">
+                    <span class="font-medium">{{ channel.name }}</span>
                   </a>
                 </li>
               </ul>
-            </li>
+            </li>            
             <li>
               <a pRipple class="flex align-items-center cursor-pointer p-3 hover:bg-bluegray-900 border-round text-bluegray-100 hover:text-bluegray-50
                             transition-duration-150 transition-colors">

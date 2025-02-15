@@ -4,6 +4,7 @@ import { MenuModule } from 'primeng/menu';
 import { RippleModule } from 'primeng/ripple';
 import { ButtonModule } from 'primeng/button';
 import { ChannelsService } from '../../services/channels.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-channel-list',
@@ -16,6 +17,7 @@ export class ChannelListComponent implements OnInit {
   items: MenuItem[] = [];
 
   constructor(
+    private router: Router,
     private channelService: ChannelsService
   ){}
 
@@ -30,6 +32,7 @@ export class ChannelListComponent implements OnInit {
   }
 
   onAddChannel() {
-    this.channelService.addChannel();
+    const addedChannel = this.channelService.addChannel();
+    this.router.navigate([`/channels/`,addedChannel.id]);
   }
 }

@@ -32,8 +32,10 @@ export class ChannelsService {
     return this.channels$;
   }
 
-  addChannel(): void {
-    this._channels.next([...this._channels.value, {id: '', name: 'neuer Sender', stream: '', mode: ChannelMode.Off}]);
+  addChannel(): IChannel {
+    const newChannel = {id: crypto.randomUUID(), name: 'neuer Sender', stream: '', mode: ChannelMode.Off};
+    this._channels.next([...this._channels.value, newChannel]);
+    return newChannel;
   }
 
   updateChannel(channel: IChannel): Observable<IChannel> {
