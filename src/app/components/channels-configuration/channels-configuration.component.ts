@@ -2,25 +2,30 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { ChannelsService } from '../../services/channels.service';
-import { IChannel } from '../../models/channel';
+import { IChannel, ChannelMode } from '../../models/channel';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
+import { DropdownModule } from 'primeng/dropdown';
 
 @Component({
   selector: 'app-channels-configuration',
   templateUrl: './channels-configuration.component.html',
   styleUrl: './channels-configuration.component.scss',
   standalone: true,
-  imports: [CommonModule, FormsModule, ButtonModule]
+  imports: [CommonModule, FormsModule, ButtonModule, DropdownModule]
 })
 export class ChannelsConfigurationComponent implements OnInit, OnDestroy {
+  ChannelMode = ChannelMode; // Damit es in der Vorlage verwendet werden kann
   _channels: IChannel[] = [];
   channelId: string = '';
   currentChannel?: IChannel = undefined;
   tempChannel: Partial<IChannel> = {};
   editingField: string | null = null;
-
+  channelModes = Object.keys(ChannelMode)
+                       .filter(key => isNaN(Number(key))) // Nur die Enum-Strings behalten
+                       .map(key => ({ label: key, value: ChannelMode[key as keyof typeof ChannelMode] }));
+                      
   private _unsubscribeAll: Subject<any> = new Subject<any>();
   
   constructor(
@@ -31,6 +36,10 @@ export class ChannelsConfigurationComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.channelId = params.get('id') ?? '';
+
+      if(this._channels.length > 0) {
+        this.currentChannel = this._channels.find(c => c.id === this.channelId);
+      }
     });
 
     this.channelsService.getChannels().pipe(takeUntil(this._unsubscribeAll)).subscribe(channels => {

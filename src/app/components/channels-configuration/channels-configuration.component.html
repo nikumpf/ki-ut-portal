@@ -13,22 +13,6 @@
     <div *ngIf="currentChannel" class="border-2 border-dashed surface-border flex-grow-1 overflow-auto">
         <ul class="list-none p-0 m-0">
             <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
-              <div class="text-500 w-2 md:w-2 font-medium">ID</div>
-              <div class="text-900 w-8 md:w-8 md:flex-order-0 flex-order-0">
-                <ng-container *ngIf="editingField === 'id'">
-                  <input type="text" [(ngModel)]="tempChannel.id" class="p-inputtext w-full" />
-                </ng-container>
-                <ng-container *ngIf="editingField !== 'id'">
-                  {{ currentChannel.id }}
-                </ng-container>
-              </div>
-              <div class="w-2 md:w-2 flex justify-content-end">
-                <button *ngIf="editingField === 'id'" pButton pRipple label="" icon="pi pi-check" class="p-button-text" (click)="toggleEdit('id')"></button>
-                <button *ngIf="editingField === 'id'" pButton pRipple label="" icon="pi pi-times" class="p-button-text" (click)="cancelEdit()"></button>
-                <button *ngIf="editingField !== 'id'" pButton pRipple label="" icon="pi pi-pencil" class="p-button-text" (click)="toggleEdit('id')" [disabled]="editingField !== null"></button>
-              </div>
-            </li>
-            <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
               <div class="text-500 w-2 md:w-2 font-medium">Name</div>
               <div class="text-900 w-8 md:w-8 md:flex-order-0 flex-order-0">
                 <ng-container *ngIf="editingField === 'name'">
@@ -61,26 +45,28 @@
               </div>
             </li>
             <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
-              <div class="text-500 w-2 md:w-2 font-medium">Modus</div>
-              <div class="text-900 w-8 md:w-8 md:flex-order-0 flex-order-0">
-                <ng-container *ngIf="editingField === 'mode'">
-                  <input type="text" [(ngModel)]="tempChannel.mode" class="p-inputtext w-full" />
-                </ng-container>
-                <ng-container *ngIf="editingField !== 'mode'">
-                  {{ currentChannel.mode }}
-                </ng-container>
-              </div>
-              <div class="w-2 md:w-2 flex justify-content-end">
-                <button *ngIf="editingField === 'mode'" pButton pRipple label="" icon="pi pi-check" class="p-button-text" (click)="toggleEdit('mode')"></button>
-                <button *ngIf="editingField === 'mode'" pButton pRipple label="" icon="pi pi-times" class="p-button-text" (click)="cancelEdit()"></button>
-                <button *ngIf="editingField !== 'mode'" pButton pRipple label="" icon="pi pi-pencil" class="p-button-text" (click)="toggleEdit('mode')" [disabled]="editingField !== null"></button>
-              </div>
-            </li>
+                <div class="text-500 w-2 md:w-2 font-medium">Modus</div>
+                <div class="text-900 w-8 md:w-8 md:flex-order-0 flex-order-0">
+                  <ng-container *ngIf="editingField === 'mode'">
+                    <p-dropdown 
+                      [options]="channelModes" 
+                      [(ngModel)]="tempChannel.mode" 
+                      optionLabel="label" 
+                      optionValue="value"
+                      class="w-full">
+                    </p-dropdown>
+                  </ng-container>
+                  <ng-container *ngIf="editingField !== 'mode'">
+                    <span [ngClass]="{'text-red-500': ChannelMode[currentChannel.mode]==='Off' }">{{ ChannelMode[currentChannel.mode] }}</span>
+                  </ng-container>
+                </div>
+                <div class="w-2 md:w-2 flex justify-content-end">
+                  <button *ngIf="editingField === 'mode'" pButton pRipple label="" icon="pi pi-check" class="p-button-text" (click)="toggleEdit('mode')"></button>
+                  <button *ngIf="editingField === 'mode'" pButton pRipple label="" icon="pi pi-times" class="p-button-text" (click)="cancelEdit()"></button>
+                  <button *ngIf="editingField !== 'mode'" pButton pRipple label="" icon="pi pi-pencil" class="p-button-text" (click)="toggleEdit('mode')" [disabled]="editingField !== null"></button>
+                </div>
+              </li>
+              
           </ul>
-    </div>
-
-    <!-- FOOTER -->
-    <div *ngIf="currentChannel" class="mt-3 flex justify-content-end items-center">
-        <button pButton pRipple label="Speichern" icon="pi pi-save"></button>
     </div>
 </div>
