@@ -35,6 +35,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.primeng.ripple.set(true);
 
     this.channelsService.getChannels().pipe(takeUntil(this._unsubscribeAll)).subscribe(channels => {
+      console.log('channels', channels);
       this._channels = channels;
     });
   }

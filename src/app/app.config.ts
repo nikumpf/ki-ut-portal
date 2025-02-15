@@ -18,7 +18,7 @@ export const appConfig: ApplicationConfig = {
         options: {
           cssLayer: {
             name: 'primeng',
-            order: 'app-styles, primeng, another-css-library'
+            order: 'app-styles, primeng'
           },
           prefix: 'p',
           ripple: true,

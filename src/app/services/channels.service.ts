@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { IChannel } from '../models/channel';
+import { ChannelMode, IChannel } from '../models/channel';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +30,10 @@ export class ChannelsService {
     );
 
     return this.channels$;
+  }
+
+  addChannel(): void {
+    this._channels.next([...this._channels.value, {id: '', name: 'neuer Sender', stream: '', mode: ChannelMode.Off}]);
   }
 
   updateChannel(channel: IChannel): Observable<IChannel> {
