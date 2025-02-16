@@ -7,11 +7,13 @@ import { PrimeNG } from 'primeng/config';
 import { ActivatedRoute, Router, RouterModule, RouterOutlet } from '@angular/router';
 import { StyleClassModule } from 'primeng/styleclass';
 import { CommonModule } from '@angular/common';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  imports: [RouterOutlet, StyleClassModule, CommonModule, RouterModule],
+  imports: [RouterOutlet, StyleClassModule, CommonModule, RouterModule, ConfirmDialogModule, ToastModule],
 })
 export class AppComponent implements OnInit, OnDestroy {
   _channels: IChannel[] = [];

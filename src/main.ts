@@ -4,6 +4,7 @@ import { AppComponent } from './app/app.component';
 
 import { Amplify } from 'aws-amplify';
 import outputs from '../amplify_outputs.json';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 Amplify.configure(outputs);
 
@@ -12,7 +13,9 @@ export function getBaseUrl() {
 }
 
 const providers = [
-  { provide: 'BASE_URL', useFactory: getBaseUrl, deps: [] }
+  { provide: 'BASE_URL', useFactory: getBaseUrl, deps: [] },
+  MessageService,
+  ConfirmationService
 ];
 
 appConfig.providers = appConfig.providers.concat(providers);
