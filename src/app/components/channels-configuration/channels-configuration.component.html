@@ -8,7 +8,11 @@
             <img *ngIf="currentChannel.image" [src]="currentChannel.image" class="border-round mr-3" height="20" />
             <span class="text-xl font-medium text-900">{{currentChannel.name}}</span>
         </div>
-    </div>
+        <div *ngIf="currentChannel">
+          <button pButton pRipple icon="pi pi-ellipsis-v" class="p-button-text p-button-plain p-button-rounded" (click)="menu.toggle($event)"></button>
+          <p-menu #menu [popup]="true" [model]="items" appendTo="body"></p-menu>
+      </div>
+  </div>
 
     <!-- MITTLERER BEREICH mit Scrollbar -->
     <div *ngIf="currentChannel" class="border-2 border-dashed surface-border flex-grow-1 overflow-auto">
@@ -87,3 +91,4 @@
           </ul>
     </div>
 </div>
+

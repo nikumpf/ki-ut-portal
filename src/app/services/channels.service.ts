@@ -31,7 +31,6 @@ export class ChannelsService {
   getChannels(): Observable<IChannel[]> {
     this.subscription = client.models.Channel.observeQuery().subscribe({
       next: ({ items, isSynced }) => {
-        console.log('getChannels', items, isSynced);
         this.channels = items;
         this._channels.next(this.channels);
       }
@@ -48,12 +47,15 @@ export class ChannelsService {
   }
 
   async createChannel(channel: IChannel): Promise<any> {
-    console.log('createChannel', channel);
     return await client.models.Channel.create(channel);
   }
 
   async updateChannel(channel: IChannel): Promise<any> {
-    console.log('updateChannel', channel);
     return await client.models.Channel.update(channel);
+  }
+
+  async deleteChannel(channel: IChannel): Promise<any> {
+    this._channels.next(this._channels.value.filter(c => c.id !== channel.id));
+    return await client.models.Channel.delete(channel);
   }
 }
