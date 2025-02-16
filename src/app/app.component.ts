@@ -4,19 +4,16 @@ import { ChannelsService } from './services/channels.service';
 import { IChannel } from './models/channel';
 import { PrimeNG } from 'primeng/config';
 
-//import type { Schema } from '../amplify/data/resource';
-import type { Schema } from '../../amplify/data/resource';
-import { generateClient } from 'aws-amplify/data';
 import { ActivatedRoute, Router, RouterModule, RouterOutlet } from '@angular/router';
 import { StyleClassModule } from 'primeng/styleclass';
 import { CommonModule } from '@angular/common';
-
-const client = generateClient<Schema>();
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  imports: [RouterOutlet, StyleClassModule, CommonModule, RouterModule],
+  imports: [RouterOutlet, StyleClassModule, CommonModule, RouterModule, ConfirmDialogModule, ToastModule],
 })
 export class AppComponent implements OnInit, OnDestroy {
   _channels: IChannel[] = [];
