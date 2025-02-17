@@ -6,7 +6,7 @@ adding a new "isDone" field as a boolean. The authorization rule below
 specifies that any unauthenticated user can "create", "read", "update", 
 and "delete" any "Todo" records.
 =========================================================================*/
-
+//TEST
 const schema = a.schema({
   Channel: a
     .model({
@@ -14,6 +14,13 @@ const schema = a.schema({
       stream: a.string(),
       mode: a.enum(['Off', 'Prod', 'Test', 'Dev']),
       image: a.string(),
+    })
+    .authorization((allow) => [allow.guest()]),
+  Broadcast: a
+    .model({
+      title: a.string(),
+      vps_code: a.string(),
+      starttime: a.string(),
     })
     .authorization((allow) => [allow.guest()]),
 });
